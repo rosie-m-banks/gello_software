@@ -144,9 +144,15 @@ class MujocoRobotServer:
 
         assets: Dict[str, str] = {}
         for asset in arena.asset.all_children():
-            if asset.tag == "mesh":
+
+            if hasattr(asset, "file") and asset.file is not None:
+                # IMPORTANT: use the ORIGINAL filename, not the hashed VFS name
                 f = asset.file
                 assets[f.get_vfs_filename()] = asset.file.contents
+
+            # if asset.tag == "mesh":
+            #     f = asset.file
+            #     assets[f.get_vfs_filename()] = asset.file.contents
 
         xml_string = arena.to_xml_string()
         # save xml_string to file

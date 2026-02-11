@@ -2,7 +2,7 @@
 # Check the README to learn how to adapt it to your setup.
 
 SINGLE:
-  com_port: "usb-FTDI_USB__-__Serial_Converter_FT9MFR6C-if00-port0"
+  com_port: "usb-FTDI_FT232R_USB_UART_A50285BI-if00-port0"
   namespace: ""
   num_arm_joints: 7
   joint_signs: [1, 1, 1, 1, 1, -1, 1]

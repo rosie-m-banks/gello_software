@@ -140,12 +140,13 @@ def main(args):
             }
             if args.start_joints is None:
                 reset_joints = np.deg2rad(
-                    [0, -90, 90, -90, -90, 0, 0]
+                    [0, 0, 0, 0, 0, -0.9, 0]
                 )  # Change this to your own reset joints
             else:
                 reset_joints = np.array(args.start_joints)
 
             curr_joints = env.get_obs()["joint_positions"]
+            print(curr_joints)
             if reset_joints.shape == curr_joints.shape:
                 max_delta = (np.abs(curr_joints - reset_joints)).max()
                 steps = min(int(max_delta / 0.01), 100)
@@ -220,16 +221,16 @@ def main(args):
     obs = env.get_obs()
     joints = obs["joint_positions"]
     action = agent.act(obs)
-    if (action - joints > 0.5).any():
-        print("Action is too big")
+    # if (action - joints > 0.5).any():
+    #     print("Action is too big")
 
-        # print which joints are too big
-        joint_index = np.where(action - joints > 0.8)
-        for j in joint_index:
-            print(
-                f"Joint [{j}], leader: {action[j]}, follower: {joints[j]}, diff: {action[j] - joints[j]}"
-            )
-        exit()
+    #     # print which joints are too big
+    #     joint_index = np.where(action - joints > 0.8)
+    #     for j in joint_index:
+    #         print(
+    #             f"Joint [{j}], leader: {action[j]}, follower: {joints[j]}, diff: {action[j] - joints[j]}"
+    #         )
+    #     exit()
 
     from gello.utils.control_utils import SaveInterface, run_control_loop
 

@@ -179,7 +179,8 @@ def run_control_loop(
                 print(message, end="", flush=True)
 
         action = agent.act(obs)
-
+        print(action)
+        
         # Handle save interface
         if save_interface is not None:
             result = save_interface.update(obs, action)
